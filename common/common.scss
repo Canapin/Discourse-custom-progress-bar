@@ -1,0 +1,46 @@
+.custom-progress-bar {
+    .wrap {
+        display: flex;
+        justify-content: center;
+    }
+}
+.progress-bar-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 1em .5em 0 0;
+    max-width: 500px;
+}
+.progress-bar-before {
+    width: 100%;
+}
+.progress-bar-data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    margin: .5em .5em .5em 0;
+}
+.progress-bar-container {
+    display: flex;
+    background: rgba(0,0,0,.2);
+    max-width: 100%;
+    width: #{$progress_bar_max_width};
+    height: #{$progress_bar_height};
+    margin-right: 0.5em;
+}
+.progress-status {
+    flex: 0 0 auto;
+    &:before {
+        content: "#{$current_value} / ";
+    }
+    &:after {
+        content: "#{$max_value} #{$currency}";
+    }
+}
+.progress-bar {
+    transition: all 1s ease;
+    background-color: hsl(calc($current_value * 100 / $max_value), 100%, 50%);
+    width: calc(#{$current_value} * 100% / #{$max_value});
+    max-width: 100%;
+}
