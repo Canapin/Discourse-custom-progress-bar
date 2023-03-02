@@ -1,4 +1,8 @@
-
+@if $current_value >= $max_value and $hide_when_full == "false" {
+    .custom-progress-bar {
+        display: none;
+    }
+}
 
 .custom-progress-bar {
     .wrap {
