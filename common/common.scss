@@ -1,4 +1,4 @@
-@if $current_value >= $max_value and $hide_when_full == "false" {
+@if $current_value == $max_value and $hide_when_full false {
     .custom-progress-bar {
         display: none;
     }
