@@ -1,10 +1,8 @@
-@if $current_value == $max_value and $hide_when_full false {
-    .custom-progress-bar {
-        display: none;
-    }
-}
-
 .custom-progress-bar {
+    // Won't work as values are string like "500px". Should I add a "unit" setting?
+    /*@if $current_value == $max_value and $hide_when_full == "true" {
+        display: none;
+    }*/
     .wrap {
         display: flex;
         justify-content: center;
