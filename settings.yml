@@ -22,3 +22,6 @@ currency:
 hide_when_full:
   default: false
   type: bool
+outlet_name:
+  default: "below-site-header"
+  type: string
