@@ -1,8 +1,7 @@
 .custom-progress-bar {
-    // Won't work as values are string like "500px". Should I add a "unit" setting?
-    /*@if $current_value == $max_value and $hide_when_full == "true" {
+    @if $current_value == $max_value and $hide_when_full == "true" {
         display: none;
-    }*/
+    }
     .wrap {
         display: flex;
         justify-content: center;
@@ -12,7 +11,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 1em .5em 0 0;
+    margin: 0 .5em 1em 0;
     max-width: 500px;
 }
 .progress-bar-before {
@@ -29,9 +28,13 @@
     display: flex;
     background: rgba(0,0,0,.2);
     max-width: 100%;
-    width: #{$progress_bar_max_width};
-    height: #{$progress_bar_height};
+    width: #{$progress_bar_width_value}+#{$progress_bar_width_unit};
+    height: #{$progress_bar_height_value}+#{$progress_bar_height_unit};;
     margin-right: 0.5em;
+    box-shadow: var(--shadow-header);
+    border: 1px solid var(--primary-low-mid);
+    padding: 3px;
+    border-radius: 2px;
 }
 .progress-status {
     flex: 0 0 auto;
@@ -39,7 +42,7 @@
         content: "#{$current_value} / ";
     }
     &:after {
-        content: "#{$max_value} #{$currency}";
+        content: "#{$max_value} #{$progress_unit}";
     }
 }
 .progress-bar {
