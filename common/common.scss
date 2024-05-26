@@ -3,101 +3,111 @@
 $percentage: round(calc(number($current_value) / number($max_value) * 100));
 
 @function valueDisplay() {
-    $value_display: str-replace($value_display, '{current}', $current_value);
-    $value_display: str-replace($value_display, '{max}', $max_value);
-    $value_display: str-replace($value_display, '{percentage}', $percentage);
-    @return $value_display;
+  $value_display: str-replace($value_display, "{current}", $current_value);
+  $value_display: str-replace($value_display, "{max}", $max_value);
+  $value_display: str-replace($value_display, "{percentage}", $percentage);
+  @return $value_display;
 }
 
 $value_display: valueDisplay();
 
 @if $display_on_mobile == "false" {
-    .mobile-view .progress-bar__component {
-      display: none;
-    }
+  .mobile-view .progress-bar__component {
+    display: none;
+  }
 }
 
 // Used to properly format the value display next to the progress bar
 @if number($current_value) >= number($max_value) and $hide_when_full == "true" {
-    .progress-bar__component {
-        display: none;
-    }
+  .progress-bar__component {
+    display: none;
+  }
 }
 
-.progress-bar__component {
+.progress-bar {
+  &__component {
     display: flex;
     justify-content: center;
-}
-.progress-bar__wrap {
+  }
+  &__wrap {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     width: $progress_bar_width;
     max-width: 100%;
-}
-.progress-bar__before, .progress-bar__after {
+  }
+  &__before,
+  &__after {
     width: 100%;
-}
-.progress-bar__data {
+  }
+  &__data {
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 1;
-    margin: .5em 0;
+    margin: 0.5em 0;
     gap: 0.5em;
-}
-.progress-bar__container {
+  }
+  &__container {
     display: flex;
-    background: rgba(0,0,0,.2);
+    background: rgba(0, 0, 0, 0.2);
     width: 100%;
     height: $progress_bar_height;
     box-shadow: var(--shadow-header);
     border: 1px solid var(--primary-low-mid);
     padding: 3px;
     border-radius: 2px;
-}
-.progress-bar__status {
+  }
+  &__status {
     flex: 0 0 auto;
     &:before {
-        content: "#{$value_display}";
+      content: "#{$value_display}";
     }
-}
-.progress-bar__bar {
+  }
+  &__bar {
     transition: all 1s ease;
-    background: if($progress_bar_color == '', hsl(calc($percentage), 100%, 50%), $progress_bar_color); // If empty, creates a dynamic color, from red (0%) to green (100%)
+    background: if(
+      $progress_bar_color == "",
+      hsl(calc($percentage), 100%, 50%),
+      $progress_bar_color
+    ); // If empty, creates a dynamic color, from red (0%) to green (100%)
     width: calc($percentage * 1%);
     max-width: 100%;
+  }
 }
 
 // Rules for different outlets
 .above-main-container-outlet {
-    & + .progress-bar__component {
-        padding-bottom: 1em;
-    }
+  & + .progress-bar__component {
+    padding-bottom: 1em;
+  }
 }
 .above-site-header-outlet {
-    & + .progress-bar__component {
-        padding: 0.5em 10px 0;
-        background-color: var(--header_background);
-    }
+  & + .progress-bar__component {
+    padding: 0.5em 10px 0;
+    background-color: var(--header_background);
+  }
 }
 .below-site-header-outlet {
-    & + .progress-bar__component {
-        padding: 0.5em 10px 0;
-    }
+  & + .progress-bar__component {
+    padding: 0.5em 10px 0;
+  }
 }
 #d-sidebar {
-    .progress-bar__wrap {
-        width: 100%;
-        padding: 1em 10px 0;
-    }
+  .progress-bar__wrap {
+    width: 100%;
+    padding: 1em 10px 0;
+  }
 }
 .before-header-panel-progress-bar {
-    .progress-bar__wrap {
-        width: 100%;
+  .progress-bar {
+    &__wrap {
+      width: 100%;
     }
-    .progress-bar__before, .progress-bar__after {
-        width: auto;
-        margin: 0 0.5em;
+    &__before,
+    &__after {
+      width: auto;
+      margin: 0 0.5em;
     }
+  }
 }
