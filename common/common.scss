@@ -1,7 +1,59 @@
-.custom-progress-bar {
-    @if $current_value == $max_value and $hide_when_full == "true" {
+// Settings are passed as strings to sass and we can't use < > operators on them
+// This is needed to compare the current and max value of the scrollbar
+@function number($string) {
+    $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
+    $numbers: 0 1 2 3 4 5 6 7 8 9;
+  
+    $result: 0;
+  
+    @for $i from 1 through str-length($string) {
+        $character: str-slice($string, $i, $i);
+        $index: index($strings, $character);
+      
+        @if not $index {
+          @warn "Unknown character `#{$character}`.";
+          @return false;
+        }
+      
+        $number: nth($numbers, $index);
+        $result: $result * 10 + $number;
+      }
+  
+    @return $result;
+}
+
+$percentage: round(calc(number($current_value) / number($max_value) * 100));
+
+@function valueDisplay() {
+    $value_display: str-replace($value_display, '{current}', $current_value);
+    $value_display: str-replace($value_display, '{max}', $max_value);
+    $value_display: str-replace($value_display, '{percentage}', $percentage);
+    @return $value_display;
+}
+
+@function str-replace($string, $search, $replace) {
+    $index: str-index($string, $search);
+    @if $index {
+      @return str-slice($string, 1, $index - 1) + $replace + str-slice($string, $index + str-length($search));
+    }
+    @return $string;
+}
+$value_display: valueDisplay();
+
+@if $display_on_mobile == "false" {
+    .mobile-view .progress-bar-component {
+      //display: none !important;
+    }
+}
+
+// Used to properly format the value display next to the progress bar
+@if number($current_value) >= number($max_value) and $hide_when_full == "true" {
+    .progress-bar-component {
         display: none;
     }
+}
+
+.progress-bar-component {
     .wrap {
         display: flex;
         justify-content: center;
@@ -22,15 +74,15 @@
     align-items: center;
     justify-content: center;
     max-width: 100%;
-    margin: .5em .5em .5em 0;
+    margin-top: .5em;
+    gap: 0.5em;
 }
 .progress-bar-container {
     display: flex;
     background: rgba(0,0,0,.2);
     max-width: 100%;
-    width: #{$progress_bar_width_value}+#{$progress_bar_width_unit};
-    height: #{$progress_bar_height_value}+#{$progress_bar_height_unit};;
-    margin-right: 0.5em;
+    width: $progress_bar_width + $progress_bar_width_unit;
+    height: $progress_bar_height + $progress_bar_height_unit;
     box-shadow: var(--shadow-header);
     border: 1px solid var(--primary-low-mid);
     padding: 3px;
@@ -39,15 +91,12 @@
 .progress-status {
     flex: 0 0 auto;
     &:before {
-        content: "#{$current_value} / ";
-    }
-    &:after {
-        content: "#{$max_value} #{$progress_unit}";
+        content: "#{$value_display}";
     }
 }
 .progress-bar {
     transition: all 1s ease;
-    background-color: hsl(calc($current_value * 100 / $max_value), 100%, 50%);
-    width: calc(#{$current_value} * 100% / #{$max_value});
+    background-color: if($progress_bar_color == '', hsl(calc($percentage), 100%, 50%), $progress_bar_color); // If empty, creates a dynamic color, from red (0%) to green (100%)
+    width: calc($percentage * 1%);
     max-width: 100%;
 }

@@ -1,3 +1,20 @@
 en:
   theme_metadata:
-    description: "Adds a progress bar below the header"
+    description: "Adds a progress bar on your site"
+    settings:
+      content_before: "Text above the progress bar (HTML allowed)"
+      content_after: "Text below the progress bar (HTML allowed)"
+      progress_bar_width: "Width of the progress bar"
+      progress_bar_width_unit: "Width unit for the progress bar (e.g., px, %, etc.)"
+      progress_bar_height: "Height of the progress bar"
+      progress_bar_height_unit: "Height unit of the progress bar (e.g., px, %, etc.)"
+      max_value: "Maximum value of the progress bar"
+      current_value: "Current value of the progress bar"
+      progress_unit: "Unit displayed next to the current value (e.g., $, %, etc.)"
+      value_display: "Value display format next to the progress bar. Available placeholders: {current}, {max} and {percentage}. Examples:<br>\"{percentage}%\" will show \"33%\". \"{current} of {max} rubber duckies\" will show \"66 of 200 rubber duckies\""
+      hide_when_full: "Hide the progress bar when it is filled"
+      outlet_name: "The location on the site where the progress bar will be displayed"
+      display_on_mobile: "Show the progress bar on mobile devices"
+      display_on_homepage: "Show the progress bar on the homepage"
+      url_must_contain: "URLs where the progress bar should be displayed"
+      progress_bar_color: "A valid CSS color<br>Examples: #FC0FC0, rgb(252,15,192), var(--tertiary)<br>If empty, will use a dynamic color, from red (0%) to green (100%)"

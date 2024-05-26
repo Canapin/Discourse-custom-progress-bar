@@ -1,8 +1,13 @@
 import Component from "@glimmer/component";
 import { htmlSafe } from "@ember/template";
 import { tracked } from "@glimmer/tracking";
+import { service } from "@ember/service";
+import { defaultHomepage } from "discourse/lib/utilities";
 
-export default class CustomProgressBar extends Component {
+
+export default class ProgressBar extends Component {
+  @service router;
+  @service site;
   @tracked current_value = settings.current_value;
   @tracked max_value = settings.max_value;
   @tracked hide_when_full = settings.hide_when_full;
@@ -15,13 +20,42 @@ export default class CustomProgressBar extends Component {
     return htmlSafe(settings.content_after);
   }
 
-  get shouldShowProgressBar() {
+  get hideWhenFull() {
     return !(this.hide_when_full && this.current_value >= this.max_value);
   }
 
+  get showOnMobile() {
+    return !this.site.mobileView || settings.display_on_mobile;
+  }
+  
+  get showOnRoute() {
+    const path = this.router.currentURL;
+    
+    if (
+      settings.display_on_homepage &&
+      this.router.currentRouteName === `discovery.${defaultHomepage()}`
+    ) {
+      return true;
+    }
+
+    if (settings.url_must_contain.length) {
+      const allowedPaths = settings.url_must_contain.split("|");
+      return allowedPaths.some((allowedPath) => {
+        if (allowedPath.slice(-1) === "*") {
+          return path.indexOf(allowedPath.slice(0, -1)) === 0;
+        }
+        return path === allowedPath;
+      });
+    }
+  }
+
+  get shouldShow() {
+    return this.showOnRoute && this.hideWhenFull && this.showOnMobile;
+  }
+
   <template>
-    {{#if this.shouldShowProgressBar}}
-      <div class="custom-progress-bar">
+    {{#if this.shouldShow}}
+      <div class="progress-bar-component">
         <div class="wrap">
           <div class="progress-bar-wrap">
             <div class="progress-bar-before">
