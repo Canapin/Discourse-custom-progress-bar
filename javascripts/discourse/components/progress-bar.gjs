@@ -56,20 +56,18 @@ export default class ProgressBar extends Component {
   <template>
     {{#if this.shouldShow}}
       <div class="progress-bar-component">
-        <div class="wrap">
-          <div class="progress-bar-wrap">
-            <div class="progress-bar-before">
-              {{{this.contentBefore}}}
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-before">
+            {{{this.contentBefore}}}
+          </div>
+          <div class="progress-bar-data">
+            <div class="progress-bar-container">
+              <div class="progress-bar"></div>
             </div>
-            <div class="progress-bar-data">
-              <div class="progress-bar-container">
-                <div class="progress-bar"></div>
-              </div>
-              <div class="progress-status"></div>
-            </div>
-            <div class="progress-bar-after">
-              {{{this.contentAfter}}}
-            </div>
+            <div class="progress-status"></div>
+          </div>
+          <div class="progress-bar-after">
+            {{{this.contentAfter}}}
           </div>
         </div>
       </div>

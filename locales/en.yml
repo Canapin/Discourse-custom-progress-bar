@@ -4,10 +4,8 @@ en:
     settings:
       content_before: "Text above the progress bar (HTML allowed)"
       content_after: "Text below the progress bar (HTML allowed)"
-      progress_bar_width: "Width of the progress bar"
-      progress_bar_width_unit: "Width unit for the progress bar (e.g., px, %, etc.)"
+      progress_bar_width: "Width of the progress bar (including the value display)"
       progress_bar_height: "Height of the progress bar"
-      progress_bar_height_unit: "Height unit of the progress bar (e.g., px, %, etc.)"
       max_value: "Maximum value of the progress bar"
       current_value: "Current value of the progress bar"
       progress_unit: "Unit displayed next to the current value (e.g., $, %, etc.)"
@@ -17,4 +15,4 @@ en:
       display_on_mobile: "Show the progress bar on mobile devices"
       display_on_homepage: "Show the progress bar on the homepage"
       url_must_contain: "URLs where the progress bar should be displayed"
-      progress_bar_color: "A valid CSS color<br>Examples: #FC0FC0, rgb(252,15,192), var(--tertiary)<br>If empty, will use a dynamic color, from red (0%) to green (100%)"
+      progress_bar_color: "A valid CSS background<br>Examples: #FC0FC0, rgb(252,15,192), var(--tertiary), linear-gradient(0deg, white 0%, var(--tertiary) 100%)<br>If empty, will use a dynamic color, from red (0%) to green (100%)"
