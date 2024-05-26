@@ -9,7 +9,7 @@ en:
       max_value: "Maximum value of the progress bar"
       current_value: "Current value of the progress bar"
       progress_unit: "Unit displayed next to the current value (e.g., $, %, etc.)"
-      value_display: "Value display format next to the progress bar. Available placeholders: {current}, {max} and {percentage}. Examples:<br>\"{percentage}%\" will show \"33%\". \"{current} of {max} rubber duckies\" will show \"66 of 200 rubber duckies\""
+      value_display: 'Value display format next to the progress bar. Available placeholders: {current}, {max} and {percentage}. Examples:<br>"{percentage}%" will show "33%". "{current} of {max} rubber duckies" will show "66 of 200 rubber duckies"'
       hide_when_full: "Hide the progress bar when it is filled"
       outlet_name: "The location on the site where the progress bar will be displayed"
       display_on_mobile: "Show the progress bar on mobile devices"
