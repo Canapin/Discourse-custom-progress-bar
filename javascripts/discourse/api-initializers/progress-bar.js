@@ -7,7 +7,11 @@ export default apiInitializer("0.11.1", (api) => {
     return;
   }
 
-  withPluginApi("1.14.0", (api) => {    
+  withPluginApi("1.14.0", (api) => {
+    const body = document.querySelector('body');
+    if (settings.outlet_name != '') {
+      body.classList.add(settings.outlet_name+'-progress-bar');
+    }
     api.renderInOutlet(settings.outlet_name, ProgressBar);
   });
 });
