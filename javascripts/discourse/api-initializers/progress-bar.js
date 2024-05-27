@@ -7,7 +7,7 @@ export default apiInitializer("1.14.0", (api) => {
   }
 
   const body = document.querySelector("body");
-  if (settings.outlet_name != "") {
+  if (settings.outlet_name !== "") {
     body.classList.add(settings.outlet_name + "-progress-bar");
   }
   api.renderInOutlet(settings.outlet_name, ProgressBar);

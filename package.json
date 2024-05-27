@@ -10,8 +10,5 @@
   "name": "discourse-progress-bar",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/Canapin/Discourse-custom-progress-bar",
-  "dependencies": {
-    "template-lint": "^0.8.12"
-  }
+  "repository": "https://github.com/Canapin/Discourse-custom-progress-bar"
 }
