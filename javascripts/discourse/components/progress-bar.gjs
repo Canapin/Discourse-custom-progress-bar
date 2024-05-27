@@ -1,9 +1,8 @@
 import Component from "@glimmer/component";
-import { htmlSafe } from "@ember/template";
 import { tracked } from "@glimmer/tracking";
 import { service } from "@ember/service";
+import { htmlSafe } from "@ember/template";
 import { defaultHomepage } from "discourse/lib/utilities";
-
 
 export default class ProgressBar extends Component {
   @service router;
@@ -27,10 +26,10 @@ export default class ProgressBar extends Component {
   get showOnMobile() {
     return !this.site.mobileView || settings.display_on_mobile;
   }
-  
+
   get showOnRoute() {
     const path = this.router.currentURL;
-    
+
     if (
       settings.display_on_homepage &&
       this.router.currentRouteName === `discovery.${defaultHomepage()}`
